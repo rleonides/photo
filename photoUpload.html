@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body{
+      background-color: #e5e5e5;
+      
+    }
+    .form {
+      width: 310px;
+      height: 200px;
+      background-color: #141414;
+      border-radius: 10px;
+      border:  2px ridge;
+    }
+
+    .formdiv {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      margin: 10px;
+    }
+
+    .form-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+   
+
+    }
+
+    input {
+    display: block;
+    margin: 10px;
+    border-radius: 5px;
+    color: cadetblue;
+    height: 30px;
+    
+    }
+
+    .control-file{
+      display: flex;
+      cursor: pointer;
+
+    }
+    .photoContainer{
+      height:100px;
+      width:100px;background-color:rgb(54, 184, 216);
+      margin: 0 auto;
+      border-radius:5px;
+    }
+    img{
+      height:100%;
+    }
+
+@media (max-width:360px)
+{
+  .form{
+    width: 100%;
+    
+  }
+}
+  </style>
+
+    <div class="formdiv">
+      <form  method="post" class="form" >
+        <div class="form-group">
+          <input
+            type="file"
+            class="control-file"
+            name="uploaded_fil"
+          />
+        </div>
+        <div class = "photoContainer">
+          <img src="" alt="">
+         </div>
+      </form>
+     
+    </div>
+  
+
+    <script>
+      const img = document.querySelector('.photoContainer > img');
+      const input = document.querySelector('.control-file');
+        const onChangePhoto = (ele) => {
+            let files = ele.target.files;
+            let file = files[0];
+            if (!file.type.match(/image.*/i)) return;
+            var reader = new FileReader();
+            reader.addEventListener("load", (e) => {
+              img.src = e.target.result
+             window
+              .fetch("/api/uploadPhoto", {
+                method: "post",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(
+                  { base64:e.target.result.split(',')[1],
+                    name:file.name
+                
+                })}).then((res) => res.json())
+                  .then((res) => {img.src = e.target.result.split(',')[1]})
+                  .catch(console.error);
+            });
+            reader.readAsDataURL(file);
+          }
+        input.addEventListener('change',onChangePhoto)
+           
+    </script>
+  </body>
+</html>
