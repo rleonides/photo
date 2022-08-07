@@ -10,7 +10,7 @@ deflate(input, (err, buffer) => {
 });*/
 /*const mkdir = require('fs').mkdirSync;
 console.log(mkdir('./tmp/a/appl',{ recursive: true }));*/
-const util = require('util');
+/*const util = require('util');
 let data = {
   content: [{ value: 1 },
   {
@@ -37,4 +37,4 @@ const setAccesPathToAllObjects = (obj, path = '') => {
 }
 setAccesPathToAllObjects(data)
 
-console.log(util.inspect(data, false, null, true))
+console.log(util.inspect(data, false, null, true))*/

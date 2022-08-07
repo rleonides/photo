@@ -30,13 +30,9 @@
     "urijs": "1.18.2"
   },
   "scripts": {
-    "start": "nodemon server",
-    "e2e": "nightwatch",
-    "run-e2e": "concurrently -k \"npm start\" \"npm run e2e\"",
-    "server": "babel-node start-server.js",
-    "client": "babel-node start-client.js",
-    "test": "cross-env NODE_ENV=TEST jest",
-    "test-watch": "cross-env NODE_ENV=TEST jest --watch"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server",
+    "client": "node start-client"
   },
   "author": "Rafael",
   "devDependencies": {

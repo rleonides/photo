@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+}
+@layer components {
+    .bg-gradient{
+        background: linear-gradient(90deg, rgb(249, 250, 251) 80%,  rgb(0 0 0) 80%);
+   
+    }
+}
